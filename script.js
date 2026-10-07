@@ -1,15 +1,40 @@
-// Project filters
+// Project filters (cards bounce in when switching tabs)
 var buttons = document.querySelectorAll('.filters button');
 var cards = document.querySelectorAll('.card');
+var calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var filterTimer = null;
 buttons.forEach(function (btn) {
   btn.addEventListener('click', function () {
+    if (btn.getAttribute('aria-pressed') === 'true') return;
     var f = btn.getAttribute('data-filter');
     buttons.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+
+    function showMatches() {
+      var i = 0;
+      cards.forEach(function (c) {
+        var cat = c.getAttribute('data-cat');
+        c.classList.remove('card-out', 'card-in');
+        c.hidden = !(f === 'all' || cat === f);
+        if (!c.hidden && !calmMotion) {
+          void c.offsetWidth;                 // restart the animation
+          c.style.animationDelay = (i * 0.08) + 's';
+          c.classList.add('card-in');
+          i++;
+        }
+      });
+    }
+    if (calmMotion) { showMatches(); return; }
+
+    // quick shrink-away for the current cards, then bounce the new ones in
+    clearTimeout(filterTimer);
     cards.forEach(function (c) {
-      var cat = c.getAttribute('data-cat');
-      c.hidden = !(f === 'all' || cat === f);
+      if (!c.hidden) { c.style.animationDelay = '0s'; c.classList.remove('card-in'); c.classList.add('card-out'); }
     });
+    filterTimer = setTimeout(showMatches, 180);
   });
+});
+cards.forEach(function (c) {
+  c.addEventListener('animationend', function () { c.classList.remove('card-in'); c.style.animationDelay = ''; });
 });
 
 // Contact form: opens the visitor's email app with the message filled in
@@ -63,10 +88,14 @@ function sendMessage(name, email, msg) {
     window.location.href = 'mailto:jadeng444@gmail.com?subject=' + encodeURIComponent('Website enquiry from ' + name) + '&body=' + encodeURIComponent(body);
     return;
   }
-  sendBtn.disabled = true;
-  sendBtn.textContent = 'Sending...';
-  formNote.classList.remove('is-error', 'is-sent');
-  formNote.textContent = 'Sending your message...';
+  // hide the form and show the "sent" message straight away, then send quietly in the background
+  var form = document.getElementById('contact-form');
+  var isBot = document.getElementById('botcheck').checked;
+  form.reset();
+  formNote.classList.remove('is-error');
+  formNote.textContent = '';
+  form.classList.add('is-sent');
+  document.getElementById('sent-title').focus();
   fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -77,21 +106,18 @@ function sendMessage(name, email, msg) {
       name: name,
       email: email,
       message: msg,
-      botcheck: document.getElementById('botcheck').checked
+      botcheck: isBot
     })
   })
     .then(function (res) { return res.json(); })
-    .then(function (data) {
-      if (!data.success) throw new Error(data.message || 'failed');
-      document.getElementById('contact-form').reset();
-      sendBtn.textContent = 'Sent!';
-      formNote.classList.add('is-sent');
-      formNote.textContent = "Yay, message sent! I'll reply within a couple of days.";
-      setTimeout(function () { sendBtn.textContent = 'Send message'; sendBtn.disabled = false; }, 4000);
-    })
+    .then(function (data) { if (!data.success) throw new Error(data.message || 'failed'); })
     .catch(function () {
-      sendBtn.textContent = 'Send message';
-      sendBtn.disabled = false;
+      // bring the form back with their words, so nothing is lost
+      document.getElementById('contact-form').classList.remove('is-sent');
+      document.getElementById('c-name').value = name;
+      document.getElementById('c-email').value = email;
+      document.getElementById('c-msg').value = msg;
+      formNote.classList.remove('is-sent');
       formNote.classList.add('is-error');
       formNote.innerHTML = 'Oh no, that didn\'t go through. Please try again, or email me at <a href="mailto:jadeng444@gmail.com">jadeng444@gmail.com</a>.';
     });
@@ -403,3 +429,176 @@ if (musicWanted) {
   document.addEventListener('pointerdown', firstInteraction);
   document.addEventListener('keydown', firstInteraction);
 }
+
+document.getElementById('send-another').addEventListener('click', function () {
+  document.getElementById('contact-form').classList.remove('is-sent');
+  formNote.classList.remove('is-sent', 'is-error');
+  formNote.textContent = '';
+  document.getElementById('c-name').focus();
+});
+
+// ---------- Autumn leaves drifting across the white sections ----------
+var LEAF_SHAPES = [
+  // oak leaf
+  '<svg viewBox="0 0 40 24"><path d="M3 12C5 7 9 9 10 6c2-3 5 0 7-2 3-2 5 2 8 1s4 3 7 3 4 3 5 4c-1 1-2 4-5 4s-4 4-7 3-5 3-8 1-5 1-7-2c-1-3-5-1-7-6z" fill="#D98C95" stroke="#7A4A55" stroke-width="0.9" stroke-linejoin="round"/><path d="M1 12h35" stroke="#7A4A55" stroke-width="0.9" stroke-linecap="round"/></svg>',
+  // simple oval leaf
+  '<svg viewBox="0 0 40 24"><path d="M4 12C10 3 28 3 36 12 28 21 10 21 4 12z" fill="#F2A984" stroke="#9A5E44" stroke-width="0.9"/><path d="M2 12h32" stroke="#9A5E44" stroke-width="0.9" stroke-linecap="round"/></svg>'
+];
+// a wavy path across the page: each leaf gets its own ups and downs and an overall rise or fall
+function wavyPath(w, h) {
+  var r = function (n) { return Math.round(n * 10) / 10; };
+  var rnd = function (lo, hi) { return lo + Math.random() * (hi - lo); };
+  var A1 = rnd(15, 110), f1 = rnd(0.5, 2.6), p1 = rnd(0, 6.28);
+  var A2 = rnd(4, 30), f2 = rnd(2.5, 6), p2 = rnd(0, 6.28);
+  var A3 = rnd(0, 14), f3 = rnd(6, 10), p3 = rnd(0, 6.28);
+  var slope = rnd(-170, 170), mid = h * rnd(0.3, 0.7);
+  var pts = [], n = 70, i;
+  for (i = 0; i <= n; i++) {
+    var t = i / n;
+    var y = mid + slope * (t - 0.5) + A1 * Math.sin(6.283 * f1 * t + p1) +
+      A2 * Math.sin(6.283 * f2 * t + p2) + A3 * Math.sin(6.283 * f3 * t + p3);
+    pts.push([-80 + (w + 160) * t, Math.max(15, Math.min(h - 15, y))]);
+  }
+  var d = 'M ' + r(pts[0][0]) + ' ' + r(pts[0][1]);
+  for (i = 0; i < n; i++) {
+    var a0 = pts[Math.max(i - 1, 0)], a1 = pts[i], a2 = pts[i + 1], a3 = pts[Math.min(i + 2, n)];
+    d += ' C ' + r(a1[0] + (a2[0] - a0[0]) / 6) + ' ' + r(a1[1] + (a2[1] - a0[1]) / 6) + ', ' +
+      r(a2[0] - (a3[0] - a1[0]) / 6) + ' ' + r(a2[1] - (a3[1] - a1[1]) / 6) + ', ' + r(a2[0]) + ' ' + r(a2[1]);
+  }
+  return d;
+}
+
+(function () {
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canFly = 'offsetPath' in document.body.style && !!Element.prototype.animate;
+  document.querySelectorAll('.drift[data-leaves]').forEach(function (layer) {
+    var n = parseInt(layer.getAttribute('data-leaves'), 10) || 3;
+    for (var i = 0; i < n; i++) {
+      var box = document.createElement('div');
+      box.className = 'wave-box';
+      var leaf = document.createElement('div');
+      leaf.className = 'wave-leaf';
+      box.appendChild(leaf);
+      layer.appendChild(box);
+      if (!calm && canFly) trip(box, leaf, true);
+    }
+  });
+
+  // one trip across the page with a fresh random route, then pick a new one
+  function trip(box, leaf, first) {
+    box.style.top = (Math.random() * 60) + '%';
+    leaf.style.setProperty('--spin', (0.9 + Math.random() * 2.2) + 's');
+    leaf.style.setProperty('--size', (16 + Math.random() * 22) + 'px');
+    leaf.innerHTML = '<div class="spin">' + LEAF_SHAPES[Math.floor(Math.random() * LEAF_SHAPES.length)] + '</div>';
+    leaf.style.offsetPath = 'path("' + wavyPath(box.clientWidth || 1200, box.clientHeight || 360) + '")';
+    var dur = 8000 + Math.random() * 12000;                 // 8 to 20 seconds per trip
+    var anim = leaf.animate([{ offsetDistance: '0%' }, { offsetDistance: '100%' }],
+      { duration: dur, easing: Math.random() < 0.5 ? 'linear' : 'cubic-bezier(0.3, 0.1, 0.7, 0.9)', fill: 'both',
+        delay: first ? 0 : Math.random() * 4000 });            // little random pause between trips
+    if (first) anim.currentTime = Math.random() * dur;        // start somewhere mid-trip so they're spread out
+    anim.onfinish = function () { trip(box, leaf, false); };
+  }
+})();
+
+// ---------- Now and then, a single leaf gets blown in with a big, flowy swirl ----------
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var layers = document.querySelectorAll('.drift[data-leaves]');
+  if (!layers.length || !('offsetPath' in document.body.style) || !Element.prototype.animate) return;
+  var r = function (n) { return Math.round(n * 10) / 10; };
+
+  // a gentle wave across the page with one big round loop: the loop is built like a
+  // rolling circle, so the path flows smoothly in and out of it
+  function swirlPlan(w) {
+    var rnd = function (lo, hi) { return lo + Math.random() * (hi - lo); };
+    var small = w < 700;
+    var loops = (!small && Math.random() < 0.35) ? 2 : 1;      // sometimes a double loop
+    var up = Math.random() < 0.6 ? -1 : 1;
+    var ly = up < 0 ? 350 : 80;
+    var v = w + 160;
+    var wins = [], x = w * rnd(0.15, loops === 2 ? 0.3 : 0.6);
+    for (var L = 0; L < loops; L++) {
+      var R = (small ? 65 : 120) * rnd(0.6, 1.25) * (L ? 0.75 : 1);
+      var dir = up;
+      var t0 = (x + 70) / v, dt = (R * 1.05) / v;
+      wins.push({ t0: t0, dt: dt, R: R, up: dir });
+      x += R * 2.4 + w * rnd(0.08, 0.2);
+    }
+    var amp = rnd(12, 48), ph = Math.random(), freq = rnd(0.6, 2.2), slope = rnd(-70, 70);
+    var ts = [], i, k;
+    for (i = 0; i <= 160; i++) {
+      var tt = i / 160, inside = false;
+      wins.forEach(function (wn) { if (tt > wn.t0 && tt < wn.t0 + wn.dt) inside = true; });
+      if (!inside) ts.push(tt);
+    }
+    wins.forEach(function (wn) { for (var q = 0; q <= 48; q++) ts.push(wn.t0 + wn.dt * q / 48); });
+    ts.sort(function (p, q) { return p - q; });
+    var pts = ts.map(function (t) {
+      var px = -70 + v * t, py = ly + slope * (t - wins[0].t0) + amp * Math.sin(2 * Math.PI * (t * freq + ph));
+      wins.forEach(function (wn) {
+        if (t > wn.t0 && t < wn.t0 + wn.dt) {
+          var f = 2 * Math.PI * (t - wn.t0) / wn.dt;
+          px += wn.R * Math.sin(f);
+          py += wn.up * wn.R * (1 - Math.cos(f));
+        }
+      });
+      return [px, py, t];
+    });
+    var d = 'M ' + r(pts[0][0]) + ' ' + r(pts[0][1]), len = 0;
+    var marks = wins.map(function () { return [0, 0]; });
+    for (i = 0; i < pts.length - 1; i++) {
+      var p0 = pts[Math.max(i - 1, 0)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(i + 2, pts.length - 1)];
+      d += ' C ' + r(p1[0] + (p2[0] - p0[0]) / 6) + ' ' + r(p1[1] + (p2[1] - p0[1]) / 6) + ', ' +
+        r(p2[0] - (p3[0] - p1[0]) / 6) + ' ' + r(p2[1] - (p3[1] - p1[1]) / 6) + ', ' + r(p2[0]) + ' ' + r(p2[1]);
+      len += Math.hypot(p2[0] - p1[0], p2[1] - p1[1]);
+      for (k = 0; k < wins.length; k++) {
+        if (p2[2] <= wins[k].t0) marks[k][0] = len;
+        if (p2[2] <= wins[k].t0 + wins[k].dt) marks[k][1] = len;
+      }
+    }
+    return { d: d, loops: marks.map(function (m) { return [m[0] / len, m[1] / len]; }) };
+  }
+
+  function spawnSwirl() {
+    {
+      var layer = layers[Math.floor(Math.random() * layers.length)];
+      var box = document.createElement('div');
+      box.className = 'swirl-box';
+      box.style.top = Math.max(0, Math.random() * (layer.clientHeight - 440)) + 'px';
+      var leaf = document.createElement('div');
+      leaf.className = 'swirl-leaf';
+      leaf.style.setProperty('--size', (16 + Math.random() * 20) + 'px');
+      leaf.style.setProperty('--spin', (0.6 + Math.random() * 1.2) + 's');
+      leaf.innerHTML = '<div class="spin">' + LEAF_SHAPES[Math.floor(Math.random() * LEAF_SHAPES.length)] + '</div>';
+      box.appendChild(leaf);
+      layer.appendChild(box);
+      var plan = swirlPlan(box.clientWidth || layer.clientWidth);
+      leaf.style.offsetPath = 'path("' + plan.d + '")';
+      // smooth speed: cruising in, easing a little slower around the loop, cruising out (never stopping)
+      var frames = [], steps = 50, tAcc = 0, times = [0];
+      for (var k = 1; k <= steps; k++) {
+        var s = (k - 0.5) / steps, dip = 0;
+        plan.loops.forEach(function (lp) {
+          var mid = (lp[0] + lp[1]) / 2, half = (lp[1] - lp[0]) / 2 + 0.05, z = (s - mid) / half;
+          dip = Math.max(dip, Math.exp(-z * z * 1.6));
+        });
+        var speed = 1 - 0.45 * dip;                           // dips gently around each loop, never to zero
+        tAcc += (1 / steps) / speed;
+        times.push(tAcc);
+      }
+      for (k = 0; k <= steps; k++) {
+        frames.push({ offsetDistance: (k / steps * 100).toFixed(2) + '%', offset: times[k] / tAcc });
+      }
+      var anim = leaf.animate(frames, { duration: (3600 + Math.random() * 2600) * (plan.loops.length > 1 ? 1.25 : 1), easing: 'linear', fill: 'forwards' });
+      anim.onfinish = function () { box.remove(); };
+    }
+  }
+  function blowOne() {
+    if (!document.hidden) {
+      spawnSwirl();
+      if (Math.random() < 0.25) setTimeout(spawnSwirl, 200 + Math.random() * 700);   // sometimes a pair
+    }
+    setTimeout(blowOne, 2500 + Math.random() * 9000);   // next one in 2.5 to 11.5 seconds
+  }
+  setTimeout(blowOne, 1500 + Math.random() * 3000);
+})();
