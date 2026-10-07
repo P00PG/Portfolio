@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+  document.documentElement.className = 'js';
+  try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jade | Web Design Portfolio</title>
+<meta name="description" content="Hi, I'm Jade! I design and build friendly, easy-to-use websites for small businesses and creative people.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Gaegu:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
+<div class="stars" id="stars" aria-hidden="true"></div>
+
+<header class="nav-outer">
+  <nav class="wrap nav" aria-label="Main">
+    <a href="#top" class="logo" aria-label="Back to top">J</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact" class="chat">Let's chat</a>
+      <button type="button" class="theme-toggle music-toggle" id="music-toggle" aria-pressed="false" aria-label="Background music">
+        <svg class="icon-note" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 18.5a3 3 0 1 1-2-2.83V5.5l12-2.5v12.5a3 3 0 1 1-2-2.83V7.1l-8 1.7z"/></svg>
+        <svg class="icon-note-off" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18.5a3 3 0 1 1-2-2.83V5.5l12-2.5v12.5a3 3 0 1 1-2-2.83V7.1l-8 1.7z" fill="currentColor" opacity="0.45"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Night mode">
+        <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+        <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section id="top" class="wrap hero">
+    <div class="hero-text reveal">
+      <div class="badge"><span class="badge-dot"></span>Open for new projects</div>
+      <h1>Hi, I'm Jade! I make websites that feel <span>soft &amp; sweet</span>.</h1>
+      <p>I design and build friendly, easy-to-use websites for small businesses and creative people. Here's a little collection of the sites I've made so far.</p>
+      <div class="btn-row">
+        <a href="#work" class="btn btn-dark">See my work
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-light">Say hello</a>
+      </div>
+    </div>
+
+    <div class="hero-art reveal" aria-hidden="true">
+      <div class="blob-1"></div>
+      <div class="blob-2"></div>
+      <div class="win-big">
+        <div class="win-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span></div>
+        <div class="win-body">
+          <div style="height:120px;border-radius:20px;background:var(--sky)"></div>
+          <div class="bar" style="height:14px;width:70%;background:var(--lavender-fixed)"></div>
+          <div class="bar" style="height:14px;width:50%;background:#F2ECFB"></div>
+          <div style="display:flex;gap:10px">
+            <div class="bar" style="height:36px;width:110px;background:var(--pink)"></div>
+            <div class="bar" style="height:36px;width:80px;background:var(--mint)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="win-small">
+        <div style="height:80px;border-radius:18px;background:var(--mint)"></div>
+        <div class="bar" style="height:12px;width:80%;background:#FFE9F1"></div>
+        <div class="bar" style="height:12px;width:55%;background:var(--butter)"></div>
+      </div>
+      <svg class="sparkle" style="top:0;left:0" width="40" height="40" viewBox="0 0 24 24" fill="#FFB8D2"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg>
+      <svg class="sparkle" style="top:230px;right:0" width="30" height="30" viewBox="0 0 24 24" fill="#B9A3F0"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg>
+      <svg class="sparkle" style="bottom:10px;left:46%" width="24" height="24" viewBox="0 0 24 24" fill="#8FDDB8"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg>
+    </div>
+  </section>
+
+  <div class="ribbon">
+    <p class="sr-only">Fun facts about me: My Koi order: Assam black tea, 25%, more ice; Currently obsessed with Nivalis; Fave weekend plan: rot at home and game; Counting down to my own house in 2028!; Comfort watch: any 2000s movie; Guilty of over-editing things until they’re too much, hehe.</p>
+    <div class="ribbon-track" aria-hidden="true">
+      <div class="ribbon-group"><span>My Koi order: Assam black tea, 25%, more ice</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg><span>Currently obsessed with Nivalis</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg><span>Fave weekend plan: rot at home and game</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg><span>Counting down to my own house in 2028!</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg><span>Comfort watch: any 2000s movie</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg><span>Guilty of over-editing things until they’re too much, hehe</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg></div>
+      <div class="ribbon-group"><span>My Koi order: Assam black tea, 25%, more ice</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg><span>Currently obsessed with Nivalis</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg><span>Fave weekend plan: rot at home and game</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg><span>Counting down to my own house in 2028!</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg><span>Comfort watch: any 2000s movie</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg><span>Guilty of over-editing things until they’re too much, hehe</span><svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg></div>
+    </div>
+  </div>
+
+  <div class="scallop-top" aria-hidden="true"></div>
+  <section id="work" class="work">
+    <svg class="doodle " style="top: 40px; right: 5%;" width="34" height="34" viewBox="0 0 24 24" fill="#FFD6E5" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>
+    <svg class="doodle d-slow" style="bottom: 70px; left: 2%;" width="28" height="28" viewBox="0 0 24 24" fill="#E6DAFB" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg>
+    <div class="wrap work-inner reveal">
+      <div class="work-head">
+        <h2 class="section-title">Websites I've made</h2>
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="client" aria-pressed="false">Client work</button>
+          <button type="button" data-filter="personal" aria-pressed="false">Personal</button>
+          <button type="button" data-filter="school" aria-pressed="false">School project</button>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card" data-cat="personal">
+          <div class="thumb t-pink">
+            <div class="mini">
+              <div class="mini-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="mini-url">SJ-Wedding</span></div>
+              <img class="shot" src="images/sj-wedding.png" alt="Homepage of the S&amp;J Wedding website">
+              <div class="mini-body">
+                <div class="mini-hero f-pink">S &amp; J 2025</div>
+                <div class="bar" style="height:10px;width:64%;background:var(--lavender-fixed)"></div>
+                <div class="bar" style="height:10px;width:42%;background:#F2ECFB"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-text">
+            <div class="card-top">
+              <h3>S&amp;J Wedding</h3>
+              <span class="tag f-pink">Personal</span>
+            </div>
+            <p class="muted">The website for our own 2025 wedding, with the schedule, what to wear, how to get there, an RSVP form and our song playing in the background.</p>
+            <a class="card-link" href="https://p00pg.github.io/SJ-Wedding/" target="_blank" rel="noopener">Visit website
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="card" data-cat="client">
+          <div class="thumb t-butter">
+            <div class="mini">
+              <div class="mini-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="mini-url">Tattmepapi</span></div>
+              <img class="shot" src="images/tattmepapi.png" alt="Homepage of the Tattmepapi website">
+              <div class="mini-body">
+                <div class="mini-hero f-butter">TATTMEPAPI</div>
+                <div class="bar" style="height:10px;width:64%;background:var(--lavender-fixed)"></div>
+                <div class="bar" style="height:10px;width:42%;background:#F2ECFB"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-text">
+            <div class="card-top">
+              <h3>Tattmepapi</h3>
+              <span class="tag f-butter">Client work</span>
+            </div>
+            <p class="muted">A multi-page website for a tattoo artist, with an about page, booking info, aftercare tips and an FAQ, plus an update pop-up for travel news.</p>
+            <a class="card-link" href="https://p00pg.github.io/Tattmepapi/" target="_blank" rel="noopener">Visit website
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="card" data-cat="school">
+          <div class="thumb t-sky">
+            <div class="mini">
+              <div class="mini-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="mini-url">FYP-26-S2-20P</span></div>
+              <img class="shot" src="images/fyp.png" alt="Homepage of the FYP Support Chatbot website">
+              <div class="mini-body">
+                <div class="mini-hero f-sky">Support Chatbot</div>
+                <div class="bar" style="height:10px;width:64%;background:var(--lavender-fixed)"></div>
+                <div class="bar" style="height:10px;width:42%;background:#F2ECFB"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-text">
+            <div class="card-top">
+              <h3>FYP: Support Chatbot</h3>
+              <span class="tag f-sky">School project</span>
+            </div>
+            <p class="muted">The website for my final year project, a chatbot that helps university students with IT questions. It covers the project summary, marketing, the team and documentation.</p>
+            <a class="card-link" href="https://p00pg.github.io/FYP-26-S2-20P/" target="_blank" rel="noopener">Visit website
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="card" data-cat="soon">
+          <div class="thumb t-mint">
+            <div class="mini">
+              <div class="mini-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="mini-url">your-website</span></div>
+              <div class="mini-body">
+                <div class="mini-hero f-mint">Your name here</div>
+                <div class="bar" style="height:10px;width:64%;background:var(--lavender-fixed)"></div>
+                <div class="bar" style="height:10px;width:42%;background:#F2ECFB"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-text">
+            <div class="card-top">
+              <h3>Your website next?</h3>
+              <span class="tag f-mint">Coming soon</span>
+            </div>
+            <p class="muted">I'm taking on new projects and would love to make something sweet for your business.</p>
+            <a class="card-link" href="#contact">Let's chat
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="wrap services-box reveal">
+      <h2 class="section-title center">Services</h2>
+      <div class="grid-3">
+        <div class="service">
+          <div class="icon f-pink"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B2E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9M3 9h18M3 9v11h18V9M9 20v-6h6v6"/></svg></div>
+          <h3>Small business sites</h3>
+          <p class="muted">A cosy home online for your café, shop or studio, with everything customers need to find you.</p>
+        </div>
+        <div class="service">
+          <div class="icon f-sky"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B2E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 14h8"/></svg></div>
+          <h3>Landing pages</h3>
+          <p class="muted">One sweet, focused page for a launch, an event or a special offer you want people to notice.</p>
+        </div>
+        <div class="service">
+          <div class="icon f-mint"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B2E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></div>
+          <h3>Website refresh</h3>
+          <p class="muted">Give an old, tired site a soft new look that's easier to read and nicer to use on phones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="scallop-bottom" aria-hidden="true"></div>
+
+  <section id="process" class="process">
+    <svg class="doodle d-slow" style="top: 70px; left: 4%;" width="64" height="64" viewBox="0 0 24 24" fill="#D6E9FF" aria-hidden="true"><path d="M7 18h10.5a4 4 0 0 0 .6-8 5.5 5.5 0 0 0-10.6-1.4A4.7 4.7 0 0 0 7 18z"/></svg>
+    <svg class="doodle " style="top: 50px; right: 7%;" width="30" height="30" viewBox="0 0 24 24" fill="#FFB8D2" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>
+    <svg class="doodle d-slow" style="bottom: 40px; right: 18%;" width="26" height="26" viewBox="0 0 24 24" fill="#CFF3E4" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg>
+    <div class="wrap process-inner reveal">
+      <h2 class="section-title center">My little process</h2>
+      <div class="grid-4">
+        <div class="step">
+          <div class="num" style="background:var(--lavender-fixed)">1</div>
+          <h3>Cosy chat</h3>
+          <p class="muted">We talk about your business, your customers and the feeling you want your site to have.</p>
+        </div>
+        <div class="step">
+          <div class="num f-pink">2</div>
+          <h3>Sketch &amp; design</h3>
+          <p class="muted">I mock up the pages so you can see the look and share your thoughts before anything is built.</p>
+        </div>
+        <div class="step">
+          <div class="num f-butter">3</div>
+          <h3>Build</h3>
+          <p class="muted">I turn the design into a real website that works beautifully on phones, tablets and laptops.</p>
+        </div>
+        <div class="step">
+          <div class="num f-mint">4</div>
+          <h3>Launch!</h3>
+          <p class="muted">Your site goes live, and I show you how to update the little things yourself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="currently" aria-labelledby="currently-title">
+    <svg class="doodle" style="top: 20px; left: 14%;" width="30" height="30" viewBox="0 0 24 24" fill="#FFD67A" aria-hidden="true"><path d="M12 2c.6 4.6 2.4 6.9 7 8-4.6 1.1-6.4 3.4-7 8-.6-4.6-2.4-6.9-7-8 4.6-1.1 6.4-3.4 7-8z"/></svg>
+    <svg class="doodle d-slow" style="bottom: 30px; right: 13%;" width="32" height="32" viewBox="0 0 24 24" fill="#FFB8D2" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>
+    <div class="journal">
+    <div class="note-wrap reveal">
+      <div class="note">
+        <div class="tape" aria-hidden="true"></div>
+        <h2 class="note-title" id="currently-title">Currently...</h2>
+        <ul class="note-list">
+          <li><span class="note-icon f-pink"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8h10a4 4 0 0 1 4 4v1.5a3.5 3.5 0 0 1-6.3 2.1L14 14.5h-4l-.7 1.1A3.5 3.5 0 0 1 3 13.5V12a4 4 0 0 1 4-4z"/><path d="M8 10.5v3M6.5 12h3"/><path d="M16 11h.01M17.5 13h.01"/></svg></span><span><b>Playing</b> Nivalis (obsessed!)</span></li>
+          <li><span class="note-icon f-sky"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 3l4 4 4-4"/></svg></span><span><b>Watching</b> 2000s movies on repeat</span></li>
+          <li><span class="note-icon f-mint"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1.4 11.6A1.6 1.6 0 0 1 15 21H9a1.6 1.6 0 0 1-1.6-1.4z"/><path d="M5 8h14M13 8l2-6"/><path d="M10 17h.01M13.5 16h.01M12 19h.01"/></svg></span><span><b>Sipping</b> Koi Assam black tea, 25%, more ice</span></li>
+          <li><span class="note-icon" style="background: var(--lavender-fixed)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B2E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg></span><span><b>Dreaming of</b> my own house in 2028</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sheet reveal" id="sticker-sheet">
+      <div class="sheet-head">
+        <h3 class="sheet-title">Sticker sheet</h3>
+        <button type="button" class="sound-btn" id="sound-btn" aria-pressed="true" aria-label="Sticker sounds">
+          <svg class="icon-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+          <svg class="icon-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+        </button>
+      </div>
+      <p class="sheet-why">'cause... why not? I was bored, so here you go hehe</p>
+      <p class="sheet-hint">Drag a sticker anywhere around my note! On a phone, just tap one.</p>
+      <div class="sheet-grid" id="sheet-grid"></div>
+      <p class="sheet-hint sheet-small">Drag a sticker back here to peel it off.</p>
+      <button type="button" class="peel-btn" id="peel-all">Peel them all off</button>
+    </div>
+    </div>
+    <div class="sticker-layer" id="sticker-layer" aria-hidden="true"></div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap contact-box reveal">
+      <div class="contact-blob" aria-hidden="true"></div>
+      <svg class="doodle d-slow" style="bottom: 24px; left: 28px; opacity: 0.9;" width="70" height="70" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M7 18h10.5a4 4 0 0 0 .6-8 5.5 5.5 0 0 0-10.6-1.4A4.7 4.7 0 0 0 7 18z"/></svg>
+      <svg class="doodle " style="top: 30px; right: 44%;" width="26" height="26" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>
+      <div class="contact-text">
+        <h2 class="section-title">Let's make something cute together</h2>
+        <p>Have a business that needs a website, or just want to say hi? Send me a message and I'll reply within a couple of days.</p>
+        <a class="email" href="mailto:jadeng444@gmail.com">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 7l9 6 9-6"/></svg>
+          jadeng444@gmail.com
+        </a>
+        <a class="email" href="https://wa.me/6581637068" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a3.6 3.6 0 0 1-1.8-1.8l.8-1-1-2z"/></svg>
+          WhatsApp: +65 8163 7068
+        </a>
+        <a class="email" href="https://t.me/Jaaadddeee" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.5M21 4l-3 16-9-6.5M21 4L9 13.5V19l3-3.5"/></svg>
+          Telegram: @Jaaadddeee
+        </a>
+      </div>
+      <form class="form" id="contact-form" novalidate>
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" type="text" placeholder="Jamie" required aria-describedby="err-name">
+          <p class="field-error" id="err-name" hidden></p>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" placeholder="you@example.com" required aria-describedby="err-email">
+          <p class="field-error" id="err-email" hidden></p>
+        </div>
+        <div class="field">
+          <label for="c-msg">Tell me about your project</label>
+          <textarea id="c-msg" name="message" rows="4" placeholder="I run a little bakery and..." required aria-describedby="err-msg"></textarea>
+          <p class="field-error" id="err-msg" hidden></p>
+        </div>
+        <button type="submit" class="send">Send message</button>
+        <p class="form-note" id="form-note">This opens your email app with your message ready to send.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="bunny-wrap" id="bunny">
+  <div class="bunny-bubble" id="bunny-menu" hidden>
+    <p class="bunny-title">Hi there! Wanna chat?</p>
+    <a class="bunny-link bunny-wa" href="https://wa.me/6581637068" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-4.2A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a3.6 3.6 0 0 1-1.8-1.8l.8-1-1-2z"/></svg>
+      WhatsApp
+    </a>
+    <a class="bunny-link bunny-tg" href="https://t.me/Jaaadddeee" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.5M21 4l-3 16-9-6.5M21 4L9 13.5V19l3-3.5"/></svg>
+      Telegram
+    </a>
+  </div>
+  <button type="button" class="bunny-btn" id="bunny-btn" aria-expanded="false" aria-controls="bunny-menu" aria-label="Message Jade on WhatsApp or Telegram">
+    <svg width="88" height="96" viewBox="0 0 100 110" aria-hidden="true">
+      <g class="ear ear-l">
+        <ellipse cx="36" cy="32" rx="12" ry="28" fill="#FFFFFF" stroke="#3B2E5A" stroke-width="3"/>
+        <ellipse cx="36" cy="34" rx="5.5" ry="18" fill="#FFD6E5"/>
+      </g>
+      <g class="ear ear-r">
+        <g transform="rotate(14 64 58)">
+          <ellipse cx="64" cy="32" rx="12" ry="28" fill="#FFFFFF" stroke="#3B2E5A" stroke-width="3"/>
+          <ellipse cx="64" cy="34" rx="5.5" ry="18" fill="#FFD6E5"/>
+        </g>
+      </g>
+      <ellipse cx="50" cy="76" rx="38" ry="31" fill="#FFFFFF" stroke="#3B2E5A" stroke-width="3"/>
+      <g class="eyes">
+        <circle cx="37" cy="73" r="4.5" fill="#3B2E5A"/>
+        <circle cx="63" cy="73" r="4.5" fill="#3B2E5A"/>
+        <circle cx="38.5" cy="71.5" r="1.4" fill="#FFFFFF"/>
+        <circle cx="64.5" cy="71.5" r="1.4" fill="#FFFFFF"/>
+      </g>
+      <ellipse cx="27" cy="83" rx="6.5" ry="3.8" fill="#FFB8D2"/>
+      <ellipse cx="73" cy="83" rx="6.5" ry="3.8" fill="#FFB8D2"/>
+      <path d="M47 79.5h6l-3 3.2z" fill="#FF9EC0" stroke="#FF9EC0" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M45 85q2.5 3 5 0q2.5 3 5 0" fill="none" stroke="#3B2E5A" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<footer>© <span id="year">2026</span> Jade · made with <svg class="beat" width="16" height="16" viewBox="0 0 24 24" fill="#FF9EC0" aria-label="love" role="img"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6.1.2.3.2.4 0C12.2 6.2 13.7 5 15.8 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg> and... Koi</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
