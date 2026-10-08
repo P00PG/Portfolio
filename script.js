@@ -257,9 +257,7 @@ var placedStickers = [];
 function stickerSvg(type) {
   return '<svg class="sticker-svg" viewBox="0 0 48 48" aria-hidden="true">' + STICKERS[type] + '</svg>';
 }
-function saveStickers() {
-  try { localStorage.setItem('stickers', JSON.stringify(placedStickers.map(function (s) { return s.data; }))); } catch (e) {}
-}
+function saveStickers() {}   // stickers are not kept between page loads
 function overSheet(x, y) {
   var r = sheet.getBoundingClientRect();
   return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
@@ -377,11 +375,8 @@ document.getElementById('peel-all').addEventListener('click', function () {
   placedStickers.slice().forEach(peel);
 });
 
-// bring back this visitor's stickers from last time
-try {
-  var savedStickers = JSON.parse(localStorage.getItem('stickers') || '[]');
-  savedStickers.forEach(function (d) { if (STICKERS[d.type]) makeSticker(d); });
-} catch (e) {}
+// stickers start fresh on every visit (clear any saved from older versions)
+try { localStorage.removeItem('stickers'); } catch (e) {}
 window.addEventListener('resize', function () { placedStickers.forEach(positionSticker); });
 window.addEventListener('load', function () { placedStickers.forEach(positionSticker); });
 
@@ -602,3 +597,8 @@ function wavyPath(w, h) {
   }
   setTimeout(blowOne, 1500 + Math.random() * 3000);
 })();
+
+// hero pops in when the page opens
+requestAnimationFrame(function () {
+  setTimeout(function () { var hero = document.querySelector('.hero'); if (hero) hero.classList.add('is-in'); }, 120);
+});
